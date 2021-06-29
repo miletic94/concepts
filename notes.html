@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        //CLOSURES
+        // When JS knows that it will need a variable later and when that variable is
+        // getting destroyed by the natural flow of the execution, variable will be saved
+        // as the closure variable.
+        // // Closure examples
+
+        // 1. First example var saves variable i out of the scope of the for loop
+        // so, anonymous function that will use i later doesn't need to save it.
+        // Loop runs and updates i to 3 and exits the loop. This is when setTimeout
+        // is over with waiting and gives a first call to anyonimous function. At that
+        // point i is at the value 3.
+
+        // function f1() {
+        //     for (var i = 0; i < 3; i++) {
+        //         console.log(i)
+        //         setTimeout(() => {
+        //             console.log(i)
+        //         }, 1000 * i)
+        //     }
+        // }
+
+        // 2. Example: Since anonymous functino has to use variable i later, and that
+        // variable is destroyed by the natural flow of the code execution, 
+        // anonymous function saves variable i at that point of time in order to 
+        // get to a closure when it comes time for that.
+
+        // function f2() {
+        //     for (let i = 0; i < 3; i++) {
+        //         console.log(i)
+        //         setTimeout(() => {
+        //             console.log(i)
+        //         }, 1000 * i)
+        //     }
+        // }
+        
+        // FIBONACCI RECURSIVELY
+        function naive_fib(n) {
+            if(n === 1 || n === 2) return 1
+            result = naive_fib(n-1) + naive_fib(n -2)
+            return result
+        }
+
+        console.time("naive")
+        console.log(naive_fib(30))
+        console.timeEnd("naive")
+
+        // FIBONACCI MEMOISATION
+        function fib_memo(n, memo=[]) {
+            if(n===1 || n===2) return 1
+            if (memo[n] !== undefined) {
+                return memo[n]
+            }
+            memo[n] = fib_memo(n -1, memo)  + fib_memo(n - 2, memo)
+            result = memo[n]
+            return result
+        }
+
+        console.time("memo")
+        console.log(fib_memo(30))
+        console.timeEnd("memo")
+
+        // FIBONACCI DIYNAMIC
+
+        function fib_dyn(n) {
+            if(n === 1 || n === 2) return 1
+            bottom_up = []
+            bottom_up[1] = 1
+            bottom_up[2] = 1
+
+            for (let i = 3; i < n+1; i++) {
+                bottom_up[i] = bottom_up[i-1] + bottom_up[i-2]
+            }
+            return bottom_up[n]
+        }
+
+        console.time("dynamic")
+        console.log(fib_dyn(30))
+        console.timeEnd("dynamic")
+        // userLeft = false
+        // userWatchingMemes = true
+
+        // function watchTutorialPromise() {
+        //     return new Promise((resolve, reject) => {
+        //         if(userLeft) {
+        //             reject({
+        //                 name: "User Left",
+        //                 message: ":("
+        //             })
+        //         } else if (userWatchingMemes) {
+        //             reject({
+        //                 name: "User watching memes.",
+        //                 message: "Ahh those memes..."
+        //             })
+        //         } else {
+        //             resolve("Thumbs up and subscribe")
+        //         }
+        //     })
+        // }
+
+        // watchTutorialPromise()
+        //     .then((message) => {
+        //         console.log(`Success ${message}`)
+        //     })
+        //     .catch((err) => {
+        //         console.log(`${err.name} ${err.message}`)
+        //     })
+
+        // function makeRequest(location) {
+        //     return new Promise((resolve, reject) => {
+        //         console.log(`Making Request to ${location}`)
+        //         if (location === "Google") {
+        //             resolve("Google says hi")
+        //         } else {
+        //             reject("We can only talk to Google")
+        //         }
+        //     })
+        // }
+
+        // function processRequest(response) {
+        //     return new Promise((resolve, reject) => {
+        //         console.log("Processing response")
+        //         resolve(`Extre information + ${response}`)
+        //     })
+        // }
+        // CALLING WITH .then
+        // makeRequest("Google")
+        //     .then((responnse) => {
+        //         console.log("Response recieved")
+        //         return processRequest(responnse)
+        //     })
+        //     .then(processResponse => {
+        //         console.log(processResponse)
+        //     })
+        //     .catch(err => {
+        //         console.log(err)
+        //     })
+
+        // CALLING WITH ASYNC AWAIT
+        // async function doWork() {
+        //     try {
+        //         const response = await makeRequest("f")
+        //         console.log("Response recieved")
+        //         const processResponse = await processRequest(response)
+        //         console.log(processResponse)
+        //     } catch(err) {
+        //         console.log(err)
+        //     }
+        // }
+        // doWork()
+
+
+    </script>
+</body>
+
+</html>
