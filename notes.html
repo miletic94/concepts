@@ -401,7 +401,9 @@
 
         //     console.log(swapped)
         // }
+        
 
+        // create array that has elements from 1 to N in a random order
         // function randomizedArray(N) {
         //     let array = [...Array(N).keys()]
         //     array = array.map(e => e+1)
@@ -519,9 +521,30 @@
         //                         [8, 11, 194],
         //                         [12, 37, 502]
         //                        ])
+
+        
+        // 2D array -DS https://www.hackerrank.com/challenges/2d-array/problem
+
+        function hourglassSum(arr) {
+            let resultArray = []
+            for (let i = 0; i < arr[i].length - 2; i++) {
+                for (let j = 0; j < arr[i].length - 2; j++) {
+                    console.log(`i: ${i} j: ${j}`)
+                    console.log(arr[i][j] + arr[i][j+1] + arr[i][j+2] + arr[i+1][j+1] + arr[i+2][j] + arr[i+2][j+1] + arr[i+2][j+2])
+                    resultArray.push(arr[i][j] + arr[i][j+1] + arr[i][j+2] + arr[i+1][j+1] + arr[i+2][j] + arr[i+2][j+1] + arr[i+2][j+2])
+                }
+            }
+            return Math.max(...resultArray)
+        }
+
+        console.log(hourglassSum([[1, 1, 1, 0, 0, 0], 
+                                  [0, 1, 0, 0, 0, 0], 
+                                  [1, 1, 1, 0, 0, 0], 
+                                  [0, 0, 2, 4, 4, 0], 
+                                  [0, 0, 0, 2, 0, 0], 
+                                  [0, 0, 1, 2, 4, 0]]))
         /*
-
-
+             
         1. Napiši funkcijju koja uzima niz objekata (objects) i ređa objekte prema dadotom property unazad.
         Ulaz: order(objects, property)
         Primer:
